@@ -1,0 +1,5 @@
+runpod>=1.7.0
+colpali-engine>=0.3.0
+torch>=2.4.0
+transformers>=4.40.0
+Pillow>=10.0.0
