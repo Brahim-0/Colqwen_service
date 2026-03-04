@@ -2,7 +2,7 @@
 
 [![Runpod](https://api.runpod.io/badge/Brahim-0/Colqwen_service)](https://console.runpod.io/hub/Brahim-0/Colqwen_service)
 
-RunPod serverless endpoint serving [ColQwen2.5](https://huggingface.co/vidore/colqwen2.5-v0.1) multi-vector embeddings (128-dim per patch/token).
+RunPod serverless endpoint serving [ColQwen2.5](https://huggingface.co/vidore/colqwen2.5-v0.1) multi-vector embeddings (128-dim per patch/token) for document page images and text queries.
 
 ## Operations
 
