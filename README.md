@@ -1,5 +1,7 @@
 # ColQwen2.5 Embedding Service
 
+[![Runpod](https://api.runpod.io/badge/Brahim-0/Colqwen_service)](https://console.runpod.io/hub/Brahim-0/Colqwen_service)
+
 RunPod serverless endpoint serving [ColQwen2.5](https://huggingface.co/vidore/colqwen2.5-v0.1) multi-vector embeddings (128-dim per patch/token).
 
 ## Operations
@@ -18,8 +20,7 @@ Content-Type: application/json
 {
   "input": {
     "operation": "embed_query",
-    "query": "invoice total amount",
-    "api_key": "your-embedding-api-key"
+    "query": "invoice total amount"
   }
 }
 ```
@@ -32,8 +33,7 @@ Response: `{"output": {"embeddings": [[float, ...], ...]}}` — shape `[num_toke
 {
   "input": {
     "operation": "embed_image",
-    "image_b64": "<base64-encoded PNG>",
-    "api_key": "your-embedding-api-key"
+    "image_b64": "<base64-encoded PNG>"
   }
 }
 ```
@@ -46,8 +46,7 @@ Response: `{"output": {"embeddings": [[float, ...], ...]}}` — shape `[num_patc
 {
   "input": {
     "operation": "embed_images",
-    "images_b64": ["<base64 PNG>", "<base64 PNG>", ...],
-    "api_key": "your-embedding-api-key"
+    "images_b64": ["<base64 PNG>", "<base64 PNG>", ...]
   }
 }
 ```
@@ -69,22 +68,15 @@ docker push yourdockerhub/colqwen-embedding:latest
 2. Create a new **Template**:
    - Image: `yourdockerhub/colqwen-embedding:latest`
    - Container disk: 20 GB
-   - Environment variable: `EMBEDDING_API_KEY=your-secret-key`
 3. Create a new **Endpoint** using that template:
    - GPU: L4 or A10G (24 GB VRAM minimum)
    - Min workers: 0 (scale to zero)
-   - Max workers: 1–3
+   - Max workers: 1-3
    - Idle timeout: 60s
 
 ### 3. Note your endpoint ID and RunPod API key
 
 These are needed by client applications to call the endpoint.
-
-## Environment Variables
-
-| Variable | Required | Description |
-|----------|----------|-------------|
-| `EMBEDDING_API_KEY` | No | Custom API key for request validation (defense-in-depth) |
 
 ## Local Testing
 

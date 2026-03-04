@@ -1,0 +1,10 @@
+{
+  "title": "ColQwen2.5 Embedding Service",
+  "description": "Multi-vector visual embeddings (128-dim) via ColQwen2.5 for document page images and text queries.",
+  "type": "serverless",
+  "category": "embedding",
+  "config": {
+    "runsOn": "GPU",
+    "containerDiskInGb": 20
+  }
+}
