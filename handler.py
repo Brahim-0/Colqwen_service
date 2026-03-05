@@ -13,7 +13,6 @@ Operations:
 import base64
 import io
 import logging
-import os
 
 import runpod
 import torch
@@ -27,7 +26,6 @@ logger = logging.getLogger(__name__)
 # Config
 # ---------------------------------------------------------------------------
 MODEL_ID = "vidore/colqwen2.5-v0.1"
-API_KEY = os.environ.get("EMBEDDING_API_KEY", "")
 
 # ---------------------------------------------------------------------------
 # Load model at module level — persists across warm invocations
@@ -45,15 +43,6 @@ logger.info("Model loaded successfully")
 # ---------------------------------------------------------------------------
 # Helpers
 # ---------------------------------------------------------------------------
-
-def _validate_api_key(job_input: dict) -> None:
-    """Validate custom API key (defense-in-depth on top of RunPod auth)."""
-    if not API_KEY:
-        return
-    provided = job_input.get("api_key", "")
-    if provided != API_KEY:
-        raise ValueError("Invalid API key")
-
 
 def _b64_to_image(b64_str: str) -> Image.Image:
     """Decode a base64 string to a PIL Image."""
@@ -128,8 +117,6 @@ def handler(job: dict) -> dict:
     job_input = job.get("input", {})
 
     try:
-        _validate_api_key(job_input)
-
         operation = job_input.get("operation", "")
         if operation not in OPERATIONS:
             return {"error": f"Unknown operation '{operation}'. Valid: {list(OPERATIONS.keys())}"}
